@@ -24,7 +24,7 @@ jobs:
         with:
           project: ${{ github.repository }}
           path: .
-          format: 'SARIF,HTML'
+          format: 'HTML'
           out: reports
           args: >-
             --failOnCVSS 7
