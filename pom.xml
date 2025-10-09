@@ -130,7 +130,7 @@
                 <version>${spotbugs.plugin.version}</version>
                 <configuration>
                     <effort>Max</effort>
-                    <threshold>Low</threshold>
+                    <threshold>High</threshold>
                     <failOnError>true</failOnError>
                     <xmlOutput>true</xmlOutput>
                     <plugins>
