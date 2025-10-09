@@ -1,0 +1,40 @@
+name: dependency-check
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 3 * * 1"   # еженедельно (опц.)
+jobs:
+  depcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # (рекоменд.) Если у вас Maven/Gradle — кэш сборки, чтобы распознал все зависимости
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven # или gradle
+
+      - name: OWASP Dependency-Check
+        uses: dependency-check/Dependency-Check_Action@v5
+        with:
+          project: ${{ github.repository }}
+          path: .
+          format: 'SARIF,HTML'
+          out: reports
+          args: >-
+            --failOnCVSS 7
+            --enableRetired
+
+      - name: Upload SARIF to code scanning
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: reports/dependency-check-report.sarif
+
+      - name: Save HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-check-report
+          path: reports/dependency-check-report.html
