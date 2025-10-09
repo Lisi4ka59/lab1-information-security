@@ -1,5 +1,7 @@
 name: spotbugs
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
 jobs:
   spotbugs:
     runs-on: ubuntu-latest
