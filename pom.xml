@@ -28,7 +28,7 @@
         <url/>
     </scm>
     <properties>
-        <java.version>23</java.version>
+        <java.version>21</java.version>
         <spotbugs.plugin.version>4.8.6.4</spotbugs.plugin.version>
         <findsecbugs.version>1.13.0</findsecbugs.version>
     </properties>
