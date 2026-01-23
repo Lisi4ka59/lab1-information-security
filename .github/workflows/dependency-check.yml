@@ -25,7 +25,6 @@ jobs:
           project: ${{ github.repository }}
           path: .
           format: 'HTML'
-          out: reports
           args: >-
             --failOnCVSS 7
             --enableRetired
