@@ -20,6 +20,8 @@ jobs:
         uses: dependency-check/Dependency-Check_Action@1.1.0
         env:
           JAVA_HOME: /opt/jdk
+          OSSINDEX_USER: ${{ secrets.OSSINDEX_USER }}
+          OSSINDEX_TOKEN: ${{ secrets.OSSINDEX_TOKEN }}
         with:
           project: ${{ github.repository }}
           path: .
