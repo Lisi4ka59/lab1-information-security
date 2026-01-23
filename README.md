@@ -328,6 +328,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) {
 ---
 
 #### Скриншот 2: SCA - OWASP Dependency-Check Report
+<img width="818" alt="Screenshot 2026-01-23 at 10 06 39" src="https://github.com/user-attachments/assets/d068a891-b09a-4070-a54c-c354469907a6" />
 
 
 **Описание:** Отчет показывает результаты анализа зависимостей проекта, включая список известных уязвимостей (CVE) в используемых библиотеках и их CVSS оценки.
