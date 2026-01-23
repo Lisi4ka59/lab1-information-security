@@ -20,8 +20,7 @@ jobs:
         uses: dependency-check/Dependency-Check_Action@1.1.0
         env:
           JAVA_HOME: /opt/jdk
-          OSSINDEX_USERNAME: ${{ secrets.OSSINDEX_USERNAME }}
-          OSSINDEX_PASSWORD: ${{ secrets.OSSINDEX_PASSWORD }}
+          NVD_API_KEY: ${{ secrets.OSSINDEX_TOKEN }}
         with:
           project: ${{ github.repository }}
           path: .
