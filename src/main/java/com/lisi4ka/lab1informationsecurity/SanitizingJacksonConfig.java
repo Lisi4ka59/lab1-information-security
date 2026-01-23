@@ -17,7 +17,6 @@ public class SanitizingJacksonConfig {
 
     @Bean
     public PolicyFactory xssPolicyFactory() {
-        // Keep basic formatting/links/images, strip scripts/handlers/JS URLs, etc.
         return Sanitizers.BLOCKS.and(Sanitizers.FORMATTING).and(Sanitizers.LINKS).and(Sanitizers.IMAGES);
     }
 
@@ -40,7 +39,6 @@ public class SanitizingJacksonConfig {
         public String deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
             String raw = p.getValueAsString();
             if (raw == null) return null;
-            // Sanitize AND normalize whitespace a bit (optional)
             String cleaned = policy.sanitize(raw);
             return cleaned.strip();
         }
