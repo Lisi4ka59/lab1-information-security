@@ -321,7 +321,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) {
 ### Отчеты Security Scanning
 
 #### Скриншот 1: SAST - SpotBugs Report
-
+<img width="818" height="378" alt="Screenshot 2026-01-23 at 10 04 11" src="https://github.com/user-attachments/assets/4376ab37-9906-4ee5-95ce-9adc97c51fa1" />
 
 **Описание:** Отчет показывает результаты статического анализа кода, включая найденные потенциальные уязвимости и рекомендации по их исправлению.
 
