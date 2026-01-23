@@ -3,19 +3,18 @@ on:
   push:
   pull_request:
   schedule:
-    - cron: "0 3 * * 1"   # еженедельно (опц.)
+    - cron: "0 3 * * 1"
 jobs:
   depcheck:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      # (рекоменд.) Если у вас Maven/Gradle — кэш сборки, чтобы распознал все зависимости
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
-          cache: maven # или gradle
+          cache: maven
 
       - name: OWASP Dependency-Check
         uses: dependency-check/Dependency-Check_Action@1.1.0
