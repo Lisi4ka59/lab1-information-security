@@ -16,21 +16,21 @@ jobs:
           java-version: '21'
           cache: maven
 
-      - name: OWASP Dependency-Check
-        uses: dependency-check/Dependency-Check_Action@1.1.0
+      - name: Run Dependency Check (SCA)
         env:
-          JAVA_HOME: /opt/jdk
           NVD_API_KEY: ${{ secrets.OSSINDEX_TOKEN }}
-        with:
-          project: ${{ github.repository }}
-          path: .
-          format: 'HTML'
-          args: >-
-            --failOnCVSS 7
-            --enableRetired
+        run: |
+          mkdir -p ./dependency-check-data
+          mvn -B org.owasp:dependency-check-maven:check \
+            -Dnvd.apiKey=$NVD_API_KEY \
+            -DdataDirectory=./dependency-check-data \
+            -Dformat=HTML \
+            -DfailBuildOnCVSS=7 \
+            -Dossindex.skip=true
+        continue-on-error: false
 
       - name: Save HTML report
         uses: actions/upload-artifact@v4
         with:
           name: dependency-check-report
-          path: reports/dependency-check-report.html
+          path: target/dependency-check-report.html
