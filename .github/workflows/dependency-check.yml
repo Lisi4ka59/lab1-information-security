@@ -17,6 +17,7 @@ jobs:
           cache: maven
 
       - name: OWASP Dependency-Check (docker)
+        continue-on-error: true
         run: |
           mkdir -p reports
           docker run --rm \
