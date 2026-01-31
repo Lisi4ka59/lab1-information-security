@@ -17,7 +17,7 @@ jobs:
           cache: maven
           
       - name: OWASP Dependency-Check
-        uses: dependency-check/Dependency-Check_Action@v1.1.0
+        uses: dependency-check/Dependency-Check_Action@1.1.0
         env:
           JAVA_HOME: /opt/jdk
           NVD_API_KEY: ${{ secrets.OSSINDEX_TOKEN }}
