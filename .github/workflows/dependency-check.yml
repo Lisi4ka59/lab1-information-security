@@ -16,6 +16,27 @@ jobs:
           java-version: '21'
           cache: maven
 
+      - name: Run Dependency Check (SCA)
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+        run: |
+          mkdir -p ./dependency-check-data
+          mvn -B org.owasp:dependency-check-maven:check \
+            -Dnvd.apiKey=$NVD_API_KEY \
+            -DdataDirectory=./dependency-check-data \
+            -Dformat=HTML \
+            -DfailBuildOnCVSS=0 \
+            -DsuppressionFile=dependency-check-suppressions.xml \
+            -Dossindex.skip=true
+        continue-on-error: false
+
+      - name: Report of Dependency Check
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-check-report
+          path: target/dependency-check-report.html
+
+
       - name: OWASP Dependency-Check (docker)
         continue-on-error: true
         run: |
