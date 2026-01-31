@@ -26,7 +26,7 @@ jobs:
           project: ${{ github.repository }}
           path: .
           format: 'HTML'
-          args: >-
+          others: >-
             --failOnCVSS 7
             --enableRetired
             --ossIndexUsername ${{ secrets.OSSINDEX_USER }}
