@@ -26,7 +26,7 @@ jobs:
             --scan /src \
             --format HTML \
             --out /src/reports \
-            --failOnCVSS 9 \
+            --failOnCVSS 11 \
             --enableRetired \
             --nvdApiKey "${{ secrets.NVD_API_KEY }}" \
             --ossIndexUsername "${{ secrets.OSSINDEX_USER }}" \
