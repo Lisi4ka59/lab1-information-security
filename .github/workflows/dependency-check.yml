@@ -29,6 +29,7 @@ jobs:
           args: >-
             --failOnCVSS 7
             --enableRetired
+          others: >-
             --ossIndexUsername ${{ secrets.OSSINDEX_USER }}
             --ossIndexPassword ${{ secrets.OSSINDEX_TOKEN }}
 
