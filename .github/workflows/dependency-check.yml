@@ -15,22 +15,27 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
-
-      - name: Run Dependency Check (SCA)
+          
+      - name: OWASP Dependency-Check
+        uses: dependency-check/Dependency-Check_Action@1.1.0
         env:
+          JAVA_HOME: /opt/jdk
           NVD_API_KEY: ${{ secrets.OSSINDEX_TOKEN }}
-        run: |
-          mkdir -p ./dependency-check-data
-          mvn -B org.owasp:dependency-check-maven:check \
-            -Dnvd.apiKey=$NVD_API_KEY \
-            -DdataDirectory=./dependency-check-data \
-            -Dformat=HTML \
-            -DfailBuildOnCVSS=7 \
-            -Dossindex.skip=true
-        continue-on-error: false
+          
+        with:
+          ossIndexUsername: ${{ secrets.OSSINDEX_USER }}
+          ossIndexPassword: ${{ secrets.OSSINDEX_TOKEN }}
+          project: ${{ github.repository }}
+          path: .
+          format: 'HTML'
+          args: >-
+            --failOnCVSS 7
+            --enableRetired
+
+
 
       - name: Save HTML report
         uses: actions/upload-artifact@v4
         with:
           name: dependency-check-report
-          path: target/dependency-check-report.html
+          path: reports/dependency-check-report.html
