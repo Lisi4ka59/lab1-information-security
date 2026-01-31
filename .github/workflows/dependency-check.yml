@@ -23,16 +23,14 @@ jobs:
           NVD_API_KEY: ${{ secrets.OSSINDEX_TOKEN }}
           
         with:
-          ossIndexUsername: ${{ secrets.OSSINDEX_USER }}
-          ossIndexPassword: ${{ secrets.OSSINDEX_TOKEN }}
           project: ${{ github.repository }}
           path: .
           format: 'HTML'
           args: >-
             --failOnCVSS 7
             --enableRetired
-
-
+            --ossIndexUsername ${{ secrets.OSSINDEX_USER }}
+            --ossIndexPassword ${{ secrets.OSSINDEX_TOKEN }}
 
       - name: Save HTML report
         uses: actions/upload-artifact@v4
