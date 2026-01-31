@@ -28,7 +28,7 @@ jobs:
             --out /src/reports \
             --failOnCVSS 7 \
             --enableRetired \
-            --nvdApiKey "${{ secrets.OSSINDEX_TOKEN }}" \
+            --nvdApiKey "${{ secrets.NVD_API_KEY }}" \
             --ossIndexUsername "${{ secrets.OSSINDEX_USER }}" \
             --ossIndexPassword "${{ secrets.OSSINDEX_TOKEN }}"
           
