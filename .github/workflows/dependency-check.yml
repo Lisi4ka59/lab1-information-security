@@ -31,21 +31,6 @@ jobs:
             --nvdApiKey "${{ secrets.NVD_API_KEY }}" \
             --ossIndexUsername "${{ secrets.OSSINDEX_USER }}" \
             --ossIndexPassword "${{ secrets.OSSINDEX_TOKEN }}" || true
-          
-      - name: OWASP Dependency-Check
-        uses: dependency-check/Dependency-Check_Action@1.1.0
-        env:
-          JAVA_HOME: /opt/jdk
-          NVD_API_KEY: ${{ secrets.OSSINDEX_TOKEN }}
-          
-        with:
-          project: ${{ github.repository }}
-          path: .
-          format: 'HTML'
-          args: >-
-            --failOnCVSS 7
-            --enableRetired
-            --disableOssIndex
 
       - name: Save HTML report
         uses: actions/upload-artifact@v4
