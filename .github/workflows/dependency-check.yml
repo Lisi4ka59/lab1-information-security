@@ -25,6 +25,7 @@ jobs:
           -DnvdApiKey="${{ secrets.NVD_API_KEY }}"
 
       - name: Save HTML report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: dependency-check-report
