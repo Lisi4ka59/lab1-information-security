@@ -17,12 +17,16 @@ jobs:
           cache: maven
 
       - name: OWASP Dependency-Check (Maven)
+        env:
+          MAVEN_OPTS: --add-modules jdk.incubator.vector
         run: |
           mvn -B -DskipTests org.owasp:dependency-check-maven:check \
           -Dformat=HTML \
           -DoutputDirectory=reports \
           -DfailBuildOnCVSS=7 \
           -DnvdApiKey="${{ secrets.NVD_API_KEY }}"
+          -DossIndexUsername="${{ secrets.OSSINDEX_USER }}" \
+          -DossIndexPassword="${{ secrets.OSSINDEX_TOKEN }}"
 
       - name: Save HTML report
         if: always()
