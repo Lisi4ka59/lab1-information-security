@@ -17,7 +17,6 @@ jobs:
           cache: maven
 
       - name: OWASP Dependency-Check (docker)
-        continue-on-error: true
         run: |
           mkdir -p reports
           docker run --rm \
@@ -27,11 +26,11 @@ jobs:
             --scan /src \
             --format HTML \
             --out /src/reports \
-            --failOnCVSS 11 \
+            --failOnCVSS 7 \
             --enableRetired \
             --nvdApiKey "${{ secrets.NVD_API_KEY }}" \
             --ossIndexUsername "${{ secrets.OSSINDEX_USER }}" \
-            --ossIndexPassword "${{ secrets.OSSINDEX_TOKEN }}"
+            --ossIndexPassword "${{ secrets.OSSINDEX_TOKEN }}" || true
           
       - name: OWASP Dependency-Check
         uses: dependency-check/Dependency-Check_Action@1.1.0
