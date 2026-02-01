@@ -16,22 +16,13 @@ jobs:
           java-version: '21'
           cache: maven
 
-      - name: OWASP Dependency-Check (docker)
+      - name: OWASP Dependency-Check (Maven)
         run: |
-          mkdir -p reports
-          chmod -R 777 reports
-          docker run --rm --user 0:0 \
-          -v "${{ github.workspace }}:/src" \
-          owasp/dependency-check:latest \
-          --project "${{ github.repository }}" \
-          --scan /src \
-          --format HTML \
-          --out /src/reports \
-          --failOnCVSS 7 \
-          --enableRetired \
-          --nvdApiKey "${{ secrets.NVD_API_KEY }}" \
-          --ossIndexUsername "${{ secrets.OSSINDEX_USER }}" \
-          --ossIndexPassword "${{ secrets.OSSINDEX_TOKEN }}" || true
+          mvn -B -DskipTests org.owasp:dependency-check-maven:check \
+          -Dformat=HTML \
+          -DoutputDirectory=reports \
+          -DfailBuildOnCVSS=7 \
+          -DnvdApiKey="${{ secrets.NVD_API_KEY }}"
 
       - name: Save HTML report
         uses: actions/upload-artifact@v4
