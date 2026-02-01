@@ -24,7 +24,7 @@ jobs:
           -Dformat=HTML \
           -DoutputDirectory=reports \
           -DfailBuildOnCVSS=7 \
-          -DnvdApiKey="${{ secrets.NVD_API_KEY }}"
+          -DnvdApiKey="${{ secrets.NVD_API_KEY }}" \
           -DossIndexUsername="${{ secrets.OSSINDEX_USER }}" \
           -DossIndexPassword="${{ secrets.OSSINDEX_TOKEN }}"
 
